@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Trivia Viajera ✈️ — Viajes Falabella</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: #f5f5f5;
+      color: #222222;
+      -webkit-tap-highlight-color: transparent;
+      overscroll-behavior: none;
+    }
+
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --green: #64ae28;
+      --green-dark: #4e8a1e;
+      --green-light: #e8f5da;
+      --red: #e74c3c;
+      --white: #ffffff;
+      --gray-bg: #f5f5f5;
+      --gray-border: #e0e0e0;
+      --text-dark: #222222;
+      --text-mid: #555555;
+      --shadow: 0 4px 20px rgba(0,0,0,0.10);
+      --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --transition: 0.3s ease;
+    }
+
+    /* ===== APP SHELL ===== */
+    #app {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      background: #f5f5f5;
+    }
+
+    /* ===== SCREENS ===== */
+    .screen {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      min-height: 100vh;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition);
+      overflow-y: auto;
+    }
+    .screen.active {
+      opacity: 1;
+      pointer-events: all;
+      position: relative;
+    }
+
+    /* ===== SCREEN 1: SPLASH ===== */
+    #screen-splash {
+      background: linear-gradient(160deg, #64ae28 0%, #4e8a1e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+      text-align: center;
+      min-height: 100vh;
+    }
+
+    .splash-logo {
+      width: 180px;
+      max-width: 70%;
+      object-fit: contain;
+      margin-bottom: 28px;
+      filter: brightness(0) invert(1);
+      drop-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .splash-logo-fallback {
+      font-size: 40px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 28px;
+      letter-spacing: -1px;
+    }
+
+    .splash-title {
+      font-size: 36px;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .splash-subtitle {
+      font-size: 17px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 24px;
+    }
+
+    .splash-badge {
+      display: inline-block;
+      border: 2px solid rgba(255,255,255,0.7);
+      border-radius: 50px;
+      padding: 6px 20px;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 40px;
+    }
+
+    .btn-start {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      background: #ffffff;
+      color: var(--green);
+      border: none;
+      border-radius: 50px;
+      padding: 18px 32px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      margin-bottom: 16px;
+    }
+    .btn-start:active { transform: scale(0.97); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+
+    .splash-hint {
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 400;
+    }
+
+    /* Decorative floating circles */
+    .splash-decor {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+      pointer-events: none;
+    }
+
+    /* ===== SCREEN 2: GAME ===== */
+    #screen-game {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      background: var(--gray-bg);
+    }
+
+    /* Game Header */
+    .game-header {
+      background: var(--white);
+      padding: 12px 16px 0;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .game-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .header-logo {
+      height: 32px;
+      object-fit: contain;
+    }
+    .header-logo-text {
+      font-weight: 800;
+      color: var(--green);
+      font-size: 16px;
+    }
+
+    .question-counter {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-mid);
+    }
+    .question-counter span {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Progress bar */
+    .progress-bar-wrap {
+      height: 6px;
+      background: #e8e8e8;
+      border-radius: 3px;
+      overflow: hidden;
+      margin: 0 -16px;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), #7dcf3a);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    /* Jokers row */
+    .jokers-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-top: 1px solid var(--gray-border);
+      margin-top: 6px;
+    }
+
+    .joker-btn {
+      background: none;
+      border: 2px solid var(--green);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .joker-btn:hover:not(:disabled) { background: var(--green-light); }
+    .joker-btn:active:not(:disabled) { transform: scale(0.95); }
+    .joker-btn:disabled {
+      border-color: #ccc;
+      color: #bbb;
+      cursor: not-allowed;
+      text-decoration: line-through;
+      opacity: 0.5;
+    }
+
+    /* Destination Image */
+    .dest-image-wrap {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      background: var(--green-light);
+      overflow: hidden;
+    }
+
+    .dest-image-skeleton {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, #e8f5da 25%, #d4edba 50%, #e8f5da 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .dest-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    .dest-image.loaded { opacity: 1; }
+
+    .dest-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 24px 16px 10px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+    }
+    .dest-category {
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    }
+
+    /* Question card */
+    .question-card {
+      margin: 16px;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .difficulty-stars {
+      font-size: 13px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .difficulty-label {
+      color: var(--text-mid);
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .question-text {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+
+    .hint-box {
+      margin-top: 12px;
+      padding: 10px 14px;
+      background: #fffbe6;
+      border-left: 3px solid #f39c12;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      color: #7d5a00;
+      display: none;
+    }
+    .hint-box.visible { display: block; }
+
+    /* Options */
+    .options-wrap {
+      padding: 0 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      background: var(--white);
+      border: 2px solid var(--gray-border);
+      border-radius: var(--radius-sm);
+      padding: 14px 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-dark);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .option-btn:active:not(:disabled) { transform: scale(0.98); }
+    .option-btn:disabled { cursor: default; }
+
+    .option-letter {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+
+    .option-text { flex: 1; line-height: 1.3; }
+
+    .option-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Answer states */
+    .option-btn.correct {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+      animation: bounce-in 0.35s ease;
+    }
+    .option-btn.correct .option-letter { background: rgba(255,255,255,0.25); }
+    .option-btn.correct .option-icon { opacity: 1; }
+
+    .option-btn.wrong {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .option-btn.wrong .option-letter { background: rgba(255,255,255,0.25); }
+    .option-btn.wrong .option-icon { opacity: 1; }
+
+    .option-btn.reveal-correct {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .option-btn.reveal-correct .option-letter { background: rgba(255,255,255,0.25); }
+    .option-btn.reveal-correct .option-icon { opacity: 1; }
+
+    .option-btn.eliminated {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    @keyframes bounce-in {
+      0% { transform: scale(0.98); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1.0); }
+    }
+
+    /* Next button */
+    .next-btn-wrap {
+      padding: 8px 16px 24px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .next-btn-wrap.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .btn-next {
+      display: block;
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(100,174,40,0.35);
+      transition: all 0.15s ease;
+    }
+    .btn-next:hover { background: var(--green-dark); }
+    .btn-next:active { transform: scale(0.97); }
+
+    /* Progress ladder button */
+    .ladder-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 16px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease;
+    }
+    .ladder-fab:active { transform: scale(0.93); }
+
+    /* Ladder Modal */
+    .ladder-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 300;
+      display: flex;
+      align-items: flex-end;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .ladder-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .ladder-panel {
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      padding: 24px 20px 32px;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+    .ladder-overlay.open .ladder-panel {
+      transform: translateY(0);
+    }
+
+    .ladder-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .ladder-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .ladder-step {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      border: 2px solid var(--gray-border);
+      background: #fafafa;
+      transition: all 0.2s ease;
+    }
+    .ladder-step .step-num { font-size: 14px; font-weight: 700; }
+    .ladder-step .step-icon { font-size: 16px; }
+
+    .ladder-step.answered-correct {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+    .ladder-step.answered-wrong {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+    }
+    .ladder-step.current {
+      border-color: var(--green);
+      color: var(--green);
+      animation: pulse-border 1s ease infinite;
+    }
+    @keyframes pulse-border {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(100,174,40,0.4); }
+      50% { box-shadow: 0 0 0 4px rgba(100,174,40,0.15); }
+    }
+
+    .ladder-close {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* ===== SCREEN 3: RESULTS ===== */
+    #screen-result {
+      min-height: 100vh;
+      background: var(--gray-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Confetti */
+    .confetti-container {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      opacity: 0;
+    }
+
+    .result-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 480px;
+      padding: 40px 20px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .result-logo {
+      height: 40px;
+      object-fit: contain;
+      margin-bottom: 32px;
+    }
+    .result-logo-text {
+      font-weight: 800;
+      color: var(--green);
+      font-size: 20px;
+      margin-bottom: 32px;
+    }
+
+    .result-emoji {
+      font-size: 64px;
+      margin-bottom: 12px;
+      animation: pop-in 0.5s cubic-bezier(.36,.07,.19,.97);
+    }
+    @keyframes pop-in {
+      0% { transform: scale(0); opacity: 0; }
+      80% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .result-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--text-dark);
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .result-score-big {
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+      margin: 16px 0 4px;
+    }
+    .result-score-label {
+      font-size: 15px;
+      color: var(--text-mid);
+      margin-bottom: 20px;
+    }
+
+    /* Circular progress */
+    .circle-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 28px;
+    }
+    .circle-bg, .circle-fg {
+      position: absolute;
+      inset: 0;
+    }
+    .circle-bg { stroke: #e0e0e0; }
+    .circle-fg {
+      stroke: var(--green);
+      stroke-linecap: round;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+      transition: stroke-dashoffset 1.2s ease;
+    }
+    .circle-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .circle-pct {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--green);
+    }
+    .circle-pct-label {
+      font-size: 11px;
+      color: var(--text-mid);
+      font-weight: 500;
+    }
+
+    /* Results list */
+    .results-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .result-item {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .result-item-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .result-item-text {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.35;
+    }
+    .result-item.correct-item { border-left: 3px solid var(--green); }
+    .result-item.wrong-item { border-left: 3px solid var(--red); }
+
+    /* Buttons */
+    .btn-play-again {
+      display: block;
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 18px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(100,174,40,0.35);
+      transition: all 0.15s ease;
+      margin-bottom: 12px;
+    }
+    .btn-play-again:hover { background: var(--green-dark); }
+    .btn-play-again:active { transform: scale(0.97); }
+
+    .btn-destinations {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: var(--green);
+      border: 2px solid var(--green);
+      border-radius: 50px;
+      padding: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .btn-destinations:hover { background: var(--green-light); }
+    .btn-destinations:active { transform: scale(0.97); }
+
+    /* ===== UTILITY ===== */
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border-width: 0; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===== SPLASH SCREEN ===== -->
+  <section id="screen-splash" class="screen active">
+    <!-- Decorative circles -->
+    <div class="splash-decor" style="width:200px;height:200px;top:-60px;left:-60px;"></div>
+    <div class="splash-decor" style="width:120px;height:120px;bottom:80px;right:-30px;"></div>
+    <div class="splash-decor" style="width:70px;height:70px;bottom:200px;left:30px;"></div>
+
+    <img id="splash-logo" class="splash-logo" src="logo.png" alt="Viajes Falabella" onerror="this.style.display='none'; document.getElementById('splash-logo-fb').style.display='block';" />
+    <div id="splash-logo-fb" class="splash-logo-fallback" style="display:none;">✈️ Viajes Falabella</div>
+
+    <h1 class="splash-title">Trivia Viajera ✈️</h1>
+    <p class="splash-subtitle">¿Cuánto sabes del mundo?</p>
+    <div class="splash-badge">🌟 Travel Fest 2025</div>
+
+    <button class="btn-start" id="btn-start">¡Empezar aventura!</button>
+    <p class="splash-hint">15 preguntas · Destinos del mundo</p>
+  </section>
+
+  <!-- ===== GAME SCREEN ===== -->
+  <section id="screen-game" class="screen">
+
+    <!-- Fixed header -->
+    <header class="game-header" id="game-header">
+      <div class="game-header-row">
+        <img id="game-logo" class="header-logo" src="logo.png" alt="Viajes Falabella" onerror="this.outerHTML='<span class=\'header-logo-text\'>VF</span>';" />
+        <div class="question-counter">Pregunta <span id="q-num">1</span> / 15</div>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-bar" style="width: 0%;"></div>
+      </div>
+
+      <!-- Jokers row -->
+      <div class="jokers-row">
+        <button class="joker-btn" id="joker-5050" title="Elimina 2 opciones incorrectas">
+          🔀 50/50
+        </button>
+        <button class="joker-btn" id="joker-skip" title="Salta esta pregunta">
+          ⏭️ Saltar
+        </button>
+        <button class="joker-btn" id="joker-hint" title="Muestra una pista">
+          💡 Pista
+        </button>
+      </div>
+    </header>
+
+    <!-- Destination image -->
+    <div class="dest-image-wrap" id="dest-image-wrap">
+      <div class="dest-image-skeleton" id="img-skeleton"></div>
+      <img id="dest-img" class="dest-image" src="" alt="" loading="lazy" />
+      <div class="dest-overlay">
+        <div class="dest-category" id="dest-category">🌍 Europa</div>
+      </div>
+    </div>
+
+    <!-- Question card -->
+    <div class="question-card" id="question-card">
+      <div class="difficulty-stars" id="difficulty-stars">
+        <span id="stars-text">⭐</span>
+        <span class="difficulty-label" id="diff-label">Fácil</span>
+      </div>
+      <p class="question-text" id="question-text">Cargando pregunta...</p>
+      <div class="hint-box" id="hint-box">💡 <span id="hint-text"></span></div>
+    </div>
+
+    <!-- Options -->
+    <div class="options-wrap" id="options-wrap">
+      <button class="option-btn" id="opt-0">
+        <div class="option-letter">A</div>
+        <span class="option-text"></span>
+        <span class="option-icon"></span>
+      </button>
+      <button class="option-btn" id="opt-1">
+        <div class="option-letter">B</div>
+        <span class="option-text"></span>
+        <span class="option-icon"></span>
+      </button>
+      <button class="option-btn" id="opt-2">
+        <div class="option-letter">C</div>
+        <span class="option-text"></span>
+        <span class="option-icon"></span>
+      </button>
+      <button class="option-btn" id="opt-3">
+        <div class="option-letter">D</div>
+        <span class="option-text"></span>
+        <span class="option-icon"></span>
+      </button>
+    </div>
+
+    <!-- Next button -->
+    <div class="next-btn-wrap" id="next-btn-wrap">
+      <button class="btn-next" id="btn-next">Siguiente pregunta →</button>
+    </div>
+
+  </section>
+
+  <!-- ===== RESULT SCREEN ===== -->
+  <section id="screen-result" class="screen">
+    <div class="confetti-container" id="confetti-container"></div>
+    <div class="result-content">
+      <img id="result-logo" class="result-logo" src="logo.png" alt="Viajes Falabella" onerror="this.outerHTML='<div class=\'result-logo-text\'>✈️ Viajes Falabella</div>';" />
+
+      <div class="result-emoji" id="result-emoji">🏆</div>
+      <h2 class="result-title" id="result-title">¡Triviajero Maestro!</h2>
+
+      <!-- Circular progress -->
+      <div class="circle-wrap">
+        <svg viewBox="0 0 120 120" style="width:100%;height:100%;">
+          <circle class="circle-bg" cx="60" cy="60" r="52" fill="none" stroke-width="10" />
+          <circle class="circle-fg" id="circle-fg" cx="60" cy="60" r="52" fill="none" stroke-width="10"
+            stroke-dasharray="326.7" stroke-dashoffset="326.7" />
+        </svg>
+        <div class="circle-text">
+          <div class="circle-pct" id="circle-pct">0%</div>
+          <div class="circle-pct-label">aciertos</div>
+        </div>
+      </div>
+
+      <div class="result-score-big" id="result-score">0</div>
+      <div class="result-score-label">de 15 respuestas correctas</div>
+
+      <!-- Summary list -->
+      <div class="results-list" id="results-list"></div>
+
+      <button class="btn-play-again" id="btn-play-again">🎮 ¡Jugar de nuevo!</button>
+      <a class="btn-destinations" href="https://www.viajesfalabella.cl" target="_blank" rel="noopener">
+        🌐 Conoce nuestros destinos
+      </a>
+    </div>
+  </section>
+
+  <!-- Ladder modal -->
+  <div class="ladder-overlay" id="ladder-overlay">
+    <div class="ladder-panel">
+      <div class="ladder-title">📊 Tu progreso</div>
+      <div class="ladder-grid" id="ladder-grid"></div>
+      <button class="ladder-close" id="ladder-close">Cerrar</button>
+    </div>
+  </div>
+
+  <!-- Ladder FAB (only visible during game) -->
+  <button class="ladder-fab" id="ladder-fab" style="display:none;" aria-label="Ver progreso">📊</button>
+
+</div>
+
+<script>
+/* ===========================
+   TRIVIA VIAJERA — GAME LOGIC
+   =========================== */
+
+// ── State ──────────────────────────────────────────────
+const state = {
+  allQuestions: [],
+  sessionQuestions: [],  // 15 selected for this session
+  currentIndex: 0,
+  score: 0,
+  answers: [],           // {correct: bool, questionText: string}
+  answered: false,
+  jokers: { fiftyfifty: true, skip: true, hint: true },
+};
+
+// ── Helpers ────────────────────────────────────────────
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pickQuestions(all) {
+  const d1 = shuffle(all.filter(q => q.difficulty === 1)).slice(0, 5);
+  const d2 = shuffle(all.filter(q => q.difficulty === 2)).slice(0, 6);
+  const d3 = shuffle(all.filter(q => q.difficulty === 3)).slice(0, 4);
+  return [...d1, ...d2, ...d3];
+}
+
+const CATEGORY_EMOJI = {
+  'Europa': '🌍',
+  'América Latina': '🌎',
+  'Asia': '🌏',
+  'Caribe y playas': '🏖️',
+  'Cultura e historia': '🏛️',
+  'Curiosidades de viaje': '🧳',
+  'Destinos de naturaleza': '🌿',
+  'Gastronomía viajera': '🍽️',
+  'Geografía general': '🗺️',
+  'Norteamérica': '🗽',
+  'Oceanía': '🦘',
+};
+
+function categoryLabel(cat) {
+  return (CATEGORY_EMOJI[cat] || '✈️') + ' ' + cat;
+}
+
+function difficultyInfo(d) {
+  if (d === 1) return { stars: '⭐', label: 'Fácil' };
+  if (d === 2) return { stars: '⭐⭐', label: 'Media' };
+  return { stars: '⭐⭐⭐', label: 'Difícil' };
+}
+
+// Generate a hint from category + question context
+function generateHint(q) {
+  if (q.hint) return q.hint;
+  const catHints = {
+    'Europa': 'Es un destino muy popular en el continente europeo.',
+    'América Latina': 'Este destino se encuentra en nuestra región latinoamericana.',
+    'Asia': 'Hablamos de un país o ciudad del continente asiático.',
+    'Caribe y playas': 'Piensa en playas de aguas turquesas y arena blanca.',
+    'Cultura e historia': 'Este lugar tiene gran relevancia histórica o cultural.',
+    'Curiosidades de viaje': 'Un dato curioso que todo viajero debería saber.',
+    'Destinos de naturaleza': 'La naturaleza y los paisajes son la atracción principal.',
+    'Gastronomía viajera': 'La respuesta está relacionada con la cocina de un país.',
+    'Geografía general': 'Piensa en mapas, capitales y datos geográficos.',
+    'Norteamérica': 'Hablamos de un destino en América del Norte.',
+    'Oceanía': 'Este lugar está en el hemisferio sur, en el Pacífico.',
+  };
+  return catHints[q.category] || 'Piensa bien antes de responder. ¡Tú puedes!';
+}
+
+// ── Screen transitions ──────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ── Load questions ──────────────────────────────────────
+async function loadQuestions() {
+  const resp = await fetch('./questions.json');
+  const data = await resp.json();
+  state.allQuestions = data;
+}
+
+// ── Start game ──────────────────────────────────────────
+function startGame() {
+  state.sessionQuestions = pickQuestions(state.allQuestions);
+  state.currentIndex = 0;
+  state.score = 0;
+  state.answers = [];
+  state.answered = false;
+  state.jokers = { fiftyfifty: true, skip: true, hint: true };
+
+  // Reset joker buttons
+  ['joker-5050', 'joker-skip', 'joker-hint'].forEach(id => {
+    const btn = document.getElementById(id);
+    btn.disabled = false;
+    btn.style.opacity = '';
+  });
+
+  document.getElementById('ladder-fab').style.display = 'flex';
+  showScreen('screen-game');
+  renderQuestion();
+}
+
+// ── Render question ─────────────────────────────────────
+function renderQuestion() {
+  const q = state.sessionQuestions[state.currentIndex];
+  state.answered = false;
+
+  // Header
+  const idx = state.currentIndex + 1;
+  document.getElementById('q-num').textContent = idx;
+  const pct = ((idx - 1) / 15) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+
+  // Image
+  const imgEl = document.getElementById('dest-img');
+  const skeleton = document.getElementById('img-skeleton');
+  imgEl.classList.remove('loaded');
+  skeleton.style.display = 'block';
+  imgEl.src = '';
+  imgEl.alt = q.category;
+
+  setTimeout(() => {
+    imgEl.onload = () => {
+      skeleton.style.display = 'none';
+      imgEl.classList.add('loaded');
+    };
+    imgEl.onerror = () => {
+      skeleton.style.display = 'none';
+      document.getElementById('dest-image-wrap').style.background = 'linear-gradient(135deg, #64ae28, #4e8a1e)';
+      imgEl.style.display = 'none';
+    };
+    imgEl.src = q.image;
+    imgEl.style.display = '';
+  }, 50);
+
+  // Category
+  document.getElementById('dest-category').textContent = categoryLabel(q.category);
+
+  // Difficulty
+  const dInfo = difficultyInfo(q.difficulty);
+  document.getElementById('stars-text').textContent = dInfo.stars;
+  document.getElementById('diff-label').textContent = dInfo.label;
+
+  // Question text
+  document.getElementById('question-text').textContent = q.question;
+
+  // Hide hint
+  const hintBox = document.getElementById('hint-box');
+  hintBox.classList.remove('visible');
+  document.getElementById('hint-text').textContent = '';
+
+  // Options
+  const letters = ['A','B','C','D'];
+  for (let i = 0; i < 4; i++) {
+    const btn = document.getElementById('opt-' + i);
+    btn.className = 'option-btn';
+    btn.disabled = false;
+    btn.querySelector('.option-letter').textContent = letters[i];
+    btn.querySelector('.option-text').textContent = q.options[i];
+    btn.querySelector('.option-icon').textContent = '';
+    btn.style.display = 'flex';
+    btn.style.opacity = '1';
+    btn.onclick = () => handleAnswer(i);
+  }
+
+  // Hide next button
+  const nextWrap = document.getElementById('next-btn-wrap');
+  nextWrap.classList.remove('visible');
+
+  // Scroll to top of game
+  document.getElementById('screen-game').scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+// ── Handle answer ───────────────────────────────────────
+function handleAnswer(selectedIdx) {
+  if (state.answered) return;
+  state.answered = true;
+
+  const q = state.sessionQuestions[state.currentIndex];
+  const correct = selectedIdx === q.correct;
+
+  // Update score
+  if (correct) state.score++;
+
+  // Record answer
+  state.answers.push({
+    correct,
+    questionText: q.question,
+    category: q.category,
+  });
+
+  // Disable all options
+  for (let i = 0; i < 4; i++) {
+    const btn = document.getElementById('opt-' + i);
+    btn.disabled = true;
+
+    if (i === q.correct) {
+      if (i === selectedIdx) {
+        // User got it right
+        btn.classList.add('correct');
+        btn.querySelector('.option-icon').textContent = '✓';
+      } else {
+        // Reveal correct answer
+        btn.classList.add('reveal-correct');
+        btn.querySelector('.option-icon').textContent = '✓';
+      }
+    } else if (i === selectedIdx && !correct) {
+      btn.classList.add('wrong');
+      btn.querySelector('.option-icon').textContent = '✗';
+    }
+  }
+
+  // Update ladder
+  updateLadderGrid();
+
+  // Show next button
+  const nextWrap = document.getElementById('next-btn-wrap');
+  setTimeout(() => {
+    const isLast = state.currentIndex === 14;
+    document.getElementById('btn-next').textContent = isLast ? '🏁 Ver resultado' : 'Siguiente pregunta →';
+    nextWrap.classList.add('visible');
+  }, 600);
+}
+
+// ── Next question ───────────────────────────────────────
+function nextQuestion() {
+  if (state.currentIndex >= 14) {
+    showResult();
+    return;
+  }
+  state.currentIndex++;
+  renderQuestion();
+}
+
+// ── Joker: 50/50 ───────────────────────────────────────
+function joker5050() {
+  if (!state.jokers.fiftyfifty || state.answered) return;
+  state.jokers.fiftyfifty = false;
+  const btn = document.getElementById('joker-5050');
+  btn.disabled = true;
+
+  const q = state.sessionQuestions[state.currentIndex];
+  const wrong = [];
+  for (let i = 0; i < 4; i++) {
+    if (i !== q.correct) wrong.push(i);
+  }
+  // Remove 2 wrong options
+  shuffle(wrong).slice(0, 2).forEach(idx => {
+    const b = document.getElementById('opt-' + idx);
+    b.classList.add('eliminated');
+    b.disabled = true;
+  });
+}
+
+// ── Joker: Skip ────────────────────────────────────────
+function jokerSkip() {
+  if (!state.jokers.skip || state.answered) return;
+  state.jokers.skip = false;
+  document.getElementById('joker-skip').disabled = true;
+
+  // Record as skipped (not counted as wrong for scoring, but mark neutral)
+  state.answers.push({
+    correct: null, // skipped
+    questionText: state.sessionQuestions[state.currentIndex].question,
+    category: state.sessionQuestions[state.currentIndex].category,
+  });
+
+  updateLadderGrid();
+
+  if (state.currentIndex >= 14) {
+    showResult();
+  } else {
+    state.currentIndex++;
+    renderQuestion();
+  }
+}
+
+// ── Joker: Hint ─────────────────────────────────────────
+function jokerHint() {
+  if (!state.jokers.hint) return;
+  state.jokers.hint = false;
+  document.getElementById('joker-hint').disabled = true;
+
+  const q = state.sessionQuestions[state.currentIndex];
+  const hint = generateHint(q);
+  document.getElementById('hint-text').textContent = hint;
+  document.getElementById('hint-box').classList.add('visible');
+}
+
+// ── Ladder grid ─────────────────────────────────────────
+function updateLadderGrid() {
+  const grid = document.getElementById('ladder-grid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 15; i++) {
+    const step = document.createElement('div');
+    step.className = 'ladder-step';
+
+    const numEl = document.createElement('div');
+    numEl.className = 'step-num';
+    numEl.textContent = i + 1;
+
+    const iconEl = document.createElement('div');
+    iconEl.className = 'step-icon';
+
+    if (i < state.answers.length) {
+      const ans = state.answers[i];
+      if (ans.correct === true) {
+        step.classList.add('answered-correct');
+        iconEl.textContent = '✓';
+      } else if (ans.correct === false) {
+        step.classList.add('answered-wrong');
+        iconEl.textContent = '✗';
+      } else {
+        // skipped
+        iconEl.textContent = '⏭';
+      }
+    } else if (i === state.currentIndex && !state.answered) {
+      step.classList.add('current');
+      iconEl.textContent = '▶';
+    }
+
+    step.appendChild(numEl);
+    step.appendChild(iconEl);
+    grid.appendChild(step);
+  }
+}
+
+// ── Results ─────────────────────────────────────────────
+function showResult() {
+  document.getElementById('ladder-fab').style.display = 'none';
+
+  // Fill result data
+  const total = state.answers.filter(a => a.correct === true).length;
+  const pct = Math.round((total / 15) * 100);
+
+  // Title & emoji
+  let emoji, title;
+  if (total === 15) {
+    emoji = '🏆'; title = '¡Triviajero Maestro!';
+  } else if (total >= 12) {
+    emoji = '⭐'; title = '¡Explorador Experto!';
+  } else if (total >= 9) {
+    emoji = '🌍'; title = '¡Viajero Curioso!';
+  } else {
+    emoji = '✈️'; title = '¡Hay mundo por descubrir!';
+  }
+
+  document.getElementById('result-emoji').textContent = emoji;
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-score').textContent = total;
+
+  // Circular progress
+  const circumference = 2 * Math.PI * 52; // ≈ 326.7
+  const offset = circumference - (pct / 100) * circumference;
+  const circleFg = document.getElementById('circle-fg');
+  circleFg.style.strokeDashoffset = circumference; // reset
+
+  setTimeout(() => {
+    circleFg.style.strokeDashoffset = offset;
+    document.getElementById('circle-pct').textContent = pct + '%';
+  }, 300);
+
+  // Results list
+  const list = document.getElementById('results-list');
+  list.innerHTML = '';
+  state.answers.forEach((ans, i) => {
+    const item = document.createElement('div');
+    item.className = 'result-item ' + (ans.correct === true ? 'correct-item' : ans.correct === false ? 'wrong-item' : '');
+    const icon = ans.correct === true ? '✅' : ans.correct === false ? '❌' : '⏭️';
+    item.innerHTML = `
+      <div class="result-item-icon">${icon}</div>
+      <div class="result-item-text">
+        <strong>P${i+1}:</strong> ${ans.questionText}
+      </div>
+    `;
+    list.appendChild(item);
+  });
+
+  showScreen('screen-result');
+
+  // Confetti for good scores
+  if (total >= 9) {
+    launchConfetti();
+  }
+}
+
+// ── Confetti ─────────────────────────────────────────────
+function launchConfetti() {
+  const container = document.getElementById('confetti-container');
+  container.innerHTML = '';
+  const colors = ['#64ae28','#f39c12','#e74c3c','#3498db','#9b59b6','#1abc9c','#ffffff'];
+
+  for (let i = 0; i < 80; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'confetti-piece';
+    const size = 6 + Math.random() * 8;
+    const isCircle = Math.random() > 0.5;
+    piece.style.cssText = `
+      left: ${Math.random() * 100}%;
+      top: -${size * 2}px;
+      width: ${size}px;
+      height: ${size}px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      border-radius: ${isCircle ? '50%' : '2px'};
+      transform: rotate(${Math.random() * 360}deg);
+      animation: confetti-fall ${1.5 + Math.random() * 2}s ${Math.random() * 1.2}s ease-in forwards;
+    `;
+    container.appendChild(piece);
+  }
+
+  // Inject keyframes once
+  if (!document.getElementById('confetti-style')) {
+    const style = document.createElement('style');
+    style.id = 'confetti-style';
+    style.textContent = `
+      @keyframes confetti-fall {
+        0% { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+        80% { opacity: 1; }
+        100% { opacity: 0; transform: translateY(100vh) rotate(${Math.random() > 0.5 ? '' : '-'}720deg) scale(0.5); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+// ── Event listeners ──────────────────────────────────────
+document.getElementById('btn-start').addEventListener('click', async () => {
+  if (state.allQuestions.length === 0) {
+    try {
+      await loadQuestions();
+    } catch (e) {
+      alert('No se pudo cargar las preguntas. Verifica que questions.json esté disponible.');
+      return;
+    }
+  }
+  startGame();
+});
+
+document.getElementById('btn-next').addEventListener('click', nextQuestion);
+
+document.getElementById('joker-5050').addEventListener('click', joker5050);
+document.getElementById('joker-skip').addEventListener('click', jokerSkip);
+document.getElementById('joker-hint').addEventListener('click', jokerHint);
+
+document.getElementById('btn-play-again').addEventListener('click', () => {
+  startGame();
+});
+
+// Ladder FAB
+document.getElementById('ladder-fab').addEventListener('click', () => {
+  updateLadderGrid();
+  document.getElementById('ladder-overlay').classList.add('open');
+});
+document.getElementById('ladder-close').addEventListener('click', () => {
+  document.getElementById('ladder-overlay').classList.remove('open');
+});
+document.getElementById('ladder-overlay').addEventListener('click', (e) => {
+  if (e.target === e.currentTarget) {
+    document.getElementById('ladder-overlay').classList.remove('open');
+  }
+});
+
+// Preload questions silently on page load
+window.addEventListener('DOMContentLoaded', () => {
+  loadQuestions().catch(() => {
+    // Will retry on button click
+  });
+});
+</script>
+</body>
+</html>

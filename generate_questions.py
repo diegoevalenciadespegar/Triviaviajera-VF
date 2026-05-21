@@ -1,0 +1,2055 @@
+import json
+
+questions = [
+  # ===== EUROPA - FÁCIL (1) =====
+  {
+    "id": 1,
+    "question": "¿En qué país se encuentra la Torre Eiffel?",
+    "options": ["Francia", "Italia", "España", "Bélgica"],
+    "correct": 0,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 2,
+    "question": "¿En qué país se encuentra el Coliseo Romano?",
+    "options": ["Grecia", "Italia", "España", "Portugal"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 3,
+    "question": "¿En qué ciudad española se encuentra la Sagrada Familia?",
+    "options": ["Madrid", "Sevilla", "Barcelona", "Valencia"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 4,
+    "question": "¿Cuál es la capital de Francia?",
+    "options": ["Lyon", "Marsella", "Burdeos", "París"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 5,
+    "question": "¿En qué país europeo se encuentran las islas de Santorini y Mykonos?",
+    "options": ["Italia", "Turquía", "Grecia", "Croacia"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 6,
+    "question": "¿Qué ciudad europea es conocida por sus canales y góndolas?",
+    "options": ["Ámsterdam", "Venecia", "Bruselas", "Hamburgo"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 7,
+    "question": "¿En qué país se encuentra el Partenón?",
+    "options": ["Roma", "Grecia", "Egipto", "Turquía"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 8,
+    "question": "¿Cuál es la capital del Reino Unido?",
+    "options": ["Edimburgo", "Manchester", "Londres", "Birmingham"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 9,
+    "question": "¿En qué ciudad se encuentra el museo del Louvre?",
+    "options": ["Roma", "Madrid", "París", "Berlín"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 10,
+    "question": "¿Qué país tiene como capital Ámsterdam?",
+    "options": ["Bélgica", "Dinamarca", "Países Bajos", "Suecia"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 11,
+    "question": "¿En qué ciudad italiana se encuentra el Duomo di Firenze?",
+    "options": ["Roma", "Milán", "Florencia", "Nápoles"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 12,
+    "question": "¿En qué país europeo se encuentra la ciudad de Praga?",
+    "options": ["Polonia", "Austria", "Hungría", "República Checa"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1467269204594-f84a4e5be4d4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== EUROPA - MEDIA (2) =====
+  {
+    "id": 13,
+    "question": "¿Qué moneda se utiliza en la mayoría de los países de la Unión Europea?",
+    "options": ["Franco", "Libra", "Euro", "Corona"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 14,
+    "question": "¿En qué país se encuentra el famoso festival de música y barro de Glastonbury?",
+    "options": ["Irlanda", "Reino Unido", "Alemania", "Escocia"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 15,
+    "question": "¿Cuál es el río más largo de Europa?",
+    "options": ["Danubio", "Rin", "Volga", "Sena"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1467269204594-f84a4e5be4d4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 16,
+    "question": "¿Qué famoso parque de diversiones se ubica en París?",
+    "options": ["Universal Studios", "Disneyland Paris", "Legoland", "PortAventura"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 17,
+    "question": "¿Qué ciudad es conocida como 'La Ciudad Eterna'?",
+    "options": ["Atenas", "Roma", "Madrid", "Lisboa"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 18,
+    "question": "¿Cuál es la montaña más alta de los Alpes?",
+    "options": ["Eiger", "Matterhorn", "Mont Blanc", "Monte Rosa"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 19,
+    "question": "¿En qué ciudad se celebra la famosa Oktoberfest?",
+    "options": ["Viena", "Berlín", "Múnich", "Hamburgo"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1467269204594-f84a4e5be4d4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 20,
+    "question": "¿Cuál es la capital de Noruega?",
+    "options": ["Bergen", "Oslo", "Estocolmo", "Helsinki"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== EUROPA - DIFÍCIL (3) =====
+  {
+    "id": 21,
+    "question": "¿En qué año fue inaugurada la Torre Eiffel?",
+    "options": ["1885", "1889", "1900", "1895"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 22,
+    "question": "¿Cuál es el país más pequeño del mundo ubicado dentro de Europa?",
+    "options": ["Mónaco", "San Marino", "Liechtenstein", "Ciudad del Vaticano"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 23,
+    "question": "¿En cuántos países europeos el euro NO es la moneda oficial?",
+    "options": ["3", "5", "8", "11"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== AMÉRICA LATINA - FÁCIL (1) =====
+  {
+    "id": 24,
+    "question": "¿En qué país se encuentra Machu Picchu?",
+    "options": ["Bolivia", "Colombia", "Perú", "Ecuador"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 25,
+    "question": "¿En qué ciudad de Brasil se encuentra el Cristo Redentor?",
+    "options": ["São Paulo", "Salvador", "Brasilia", "Río de Janeiro"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 26,
+    "question": "¿Cuál es la capital de Argentina?",
+    "options": ["Córdoba", "Rosario", "Mendoza", "Buenos Aires"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 27,
+    "question": "¿Cómo se llama la famosa playa de Río de Janeiro?",
+    "options": ["Ipanema", "Copacabana", "Leblon", "Flamengo"],
+    "correct": 1,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 28,
+    "question": "¿En qué país se encuentra el Amazonas, el río más caudaloso del mundo?",
+    "options": ["Colombia", "Venezuela", "Brasil", "Perú"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 29,
+    "question": "¿Cuál es la capital de México?",
+    "options": ["Guadalajara", "Monterrey", "Puebla", "Ciudad de México"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1518659526054-190340b32735?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 30,
+    "question": "¿En qué país se encuentran las Islas Galápagos?",
+    "options": ["Perú", "Colombia", "Ecuador", "Chile"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1559827291-72f35b878c29?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 31,
+    "question": "¿En qué país de América del Sur se encuentra la Patagonia?",
+    "options": ["Solo en Chile", "Solo en Argentina", "En Argentina y Chile", "En Bolivia y Perú"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 32,
+    "question": "¿Cuál es la danza típica de Argentina?",
+    "options": ["Salsa", "Tango", "Cumbia", "Merengue"],
+    "correct": 1,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 33,
+    "question": "¿En qué país se encuentra Cartagena de Indias, ciudad amurallada Patrimonio de la Humanidad?",
+    "options": ["Venezuela", "Panamá", "Colombia", "Cuba"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== AMÉRICA LATINA - MEDIA (2) =====
+  {
+    "id": 34,
+    "question": "¿Cuál es el lago navegable más alto del mundo?",
+    "options": ["Lago Titicaca", "Lago Maracaibo", "Lago Poopó", "Lago Nicaragua"],
+    "correct": 0,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 35,
+    "question": "¿Cuál es el Carnaval más famoso del mundo, celebrado en Brasil?",
+    "options": ["Carnaval de Salvador", "Carnaval de São Paulo", "Carnaval de Río de Janeiro", "Carnaval de Recife"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 36,
+    "question": "¿En qué país se encuentra el Salar de Uyuni, el mayor desierto de sal del mundo?",
+    "options": ["Chile", "Argentina", "Bolivia", "Perú"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 37,
+    "question": "¿Qué civilización construyó Machu Picchu?",
+    "options": ["Azteca", "Maya", "Inca", "Olmeca"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 38,
+    "question": "¿Cuál es la capital de Chile?",
+    "options": ["Valparaíso", "Concepción", "Santiago", "Antofagasta"],
+    "correct": 2,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 39,
+    "question": "¿Cuál es el volcán activo más alto del mundo, ubicado en Ecuador?",
+    "options": ["Cotopaxi", "Chimborazo", "Cayambe", "Tungurahua"],
+    "correct": 0,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1559827291-72f35b878c29?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 40,
+    "question": "¿Qué país latinoamericano tiene la selva amazónica más extensa?",
+    "options": ["Colombia", "Perú", "Venezuela", "Brasil"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== AMÉRICA LATINA - DIFÍCIL (3) =====
+  {
+    "id": 41,
+    "question": "¿En qué año fue declarado Machu Picchu Patrimonio de la Humanidad por la UNESCO?",
+    "options": ["1978", "1983", "1990", "1975"],
+    "correct": 1,
+    "category": "América Latina",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 42,
+    "question": "¿Cuál es la cascada más alta del mundo, ubicada en Venezuela?",
+    "options": ["Cataratas del Iguazú", "Salto Ángel", "Cataratas de Kaieteur", "Cascada de Gullfoss"],
+    "correct": 1,
+    "category": "América Latina",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 43,
+    "question": "¿Cuántos países de América del Sur tienen salida al mar?",
+    "options": ["8", "10", "12", "9"],
+    "correct": 0,
+    "category": "América Latina",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== NORTEAMÉRICA - FÁCIL (1) =====
+  {
+    "id": 44,
+    "question": "¿En qué ciudad de EE.UU. se encuentra la Estatua de la Libertad?",
+    "options": ["Washington D.C.", "Boston", "Chicago", "Nueva York"],
+    "correct": 3,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 45,
+    "question": "¿En qué estado de EE.UU. se encuentra Disney World?",
+    "options": ["California", "Nevada", "Florida", "Texas"],
+    "correct": 2,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 46,
+    "question": "¿Cuál es la capital de Canadá?",
+    "options": ["Toronto", "Montreal", "Vancouver", "Ottawa"],
+    "correct": 3,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 47,
+    "question": "¿En qué ciudad de EE.UU. se encuentra el famoso Strip con casinos?",
+    "options": ["Miami", "Los Ángeles", "Las Vegas", "Chicago"],
+    "correct": 2,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 48,
+    "question": "¿Cómo se llama el famoso cañón natural en Arizona, EE.UU.?",
+    "options": ["Gran Cañón del Colorado", "Cañón de Bryce", "Cañón de Zion", "Cañón Antelope"],
+    "correct": 0,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1559827291-72f35b878c29?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 49,
+    "question": "¿En qué ciudad se encuentra el barrio de Miami Beach?",
+    "options": ["Fort Lauderdale", "Tampa", "Miami", "Orlando"],
+    "correct": 2,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 50,
+    "question": "¿En qué estado de EE.UU. se encuentra Hawái?",
+    "options": ["Es un estado del Pacífico", "Es un territorio de EE.UU.", "Es una isla independiente", "Pertenece a California"],
+    "correct": 0,
+    "category": "Norteamérica",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== NORTEAMÉRICA - MEDIA (2) =====
+  {
+    "id": 51,
+    "question": "¿Qué cataratas comparten la frontera entre EE.UU. y Canadá?",
+    "options": ["Cataratas del Iguazú", "Cataratas del Niágara", "Cataratas Victoria", "Cataratas Salto Ángel"],
+    "correct": 1,
+    "category": "Norteamérica",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 52,
+    "question": "¿Cuál es el parque nacional más visitado de EE.UU.?",
+    "options": ["Yellowstone", "Yosemite", "Gran Cañón", "Zion"],
+    "correct": 2,
+    "category": "Norteamérica",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1559827291-72f35b878c29?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 53,
+    "question": "¿En qué ciudad de EE.UU. se encuentra el barrio conocido como 'Little Havana'?",
+    "options": ["Nueva York", "Los Ángeles", "Miami", "Tampa"],
+    "correct": 2,
+    "category": "Norteamérica",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1506966953602-c20cc11f75e3?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 54,
+    "question": "¿Cuál es la ciudad más poblada de Canadá?",
+    "options": ["Ottawa", "Vancouver", "Montreal", "Toronto"],
+    "correct": 3,
+    "category": "Norteamérica",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== NORTEAMÉRICA - DIFÍCIL (3) =====
+  {
+    "id": 55,
+    "question": "¿Cuál es el aeropuerto más transitado del mundo?",
+    "options": ["Aeropuerto de Heathrow (Londres)", "Aeropuerto de Dubai", "Aeropuerto Internacional Hartsfield-Jackson (Atlanta)", "Aeropuerto de Pekín"],
+    "correct": 2,
+    "category": "Curiosidades de viaje",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 56,
+    "question": "¿En qué año fue inaugurada la Torre One World Trade Center en Nueva York?",
+    "options": ["2011", "2013", "2014", "2015"],
+    "correct": 2,
+    "category": "Norteamérica",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== ASIA - FÁCIL (1) =====
+  {
+    "id": 57,
+    "question": "¿En qué país asiático se encuentra el Monte Fuji?",
+    "options": ["China", "Corea del Sur", "Japón", "Vietnam"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 58,
+    "question": "¿En qué país se encuentra el Taj Mahal?",
+    "options": ["Pakistán", "Bangladesh", "India", "Nepal"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 59,
+    "question": "¿En qué país se encuentra la ciudad de Bangkok?",
+    "options": ["Vietnam", "Camboya", "Malasia", "Tailandia"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 60,
+    "question": "¿En qué continente se encuentra Dubai?",
+    "options": ["África", "Asia", "Oceanía", "Europa"],
+    "correct": 1,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 61,
+    "question": "¿Cuál es la capital de Japón?",
+    "options": ["Osaka", "Kioto", "Hiroshima", "Tokio"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 62,
+    "question": "¿En qué país se encuentra la Gran Muralla China?",
+    "options": ["Mongolia", "Corea del Norte", "China", "Vietnam"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 63,
+    "question": "¿En qué isla asiática se encuentra la famosa zona de Kuta?",
+    "options": ["Phuket", "Bali", "Lombok", "Komodo"],
+    "correct": 1,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== ASIA - MEDIA (2) =====
+  {
+    "id": 64,
+    "question": "¿Qué moneda se usa en Japón?",
+    "options": ["Yuan", "Won", "Yen", "Ringgit"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 65,
+    "question": "¿Cuál es el edificio más alto del mundo?",
+    "options": ["Shanghai Tower", "Abraj Al-Bait (Meca)", "One World Trade Center", "Burj Khalifa (Dubai)"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 66,
+    "question": "¿En qué país se encuentra el templo de Angkor Wat?",
+    "options": ["Tailandia", "Vietnam", "Laos", "Camboya"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 67,
+    "question": "¿Cuál es la ciudad más poblada del mundo?",
+    "options": ["Shanghái", "Delhi", "Ciudad de México", "Tokio"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 68,
+    "question": "¿Qué idioma se habla principalmente en Bali, Indonesia?",
+    "options": ["Malayo", "Balinés e Indonesio", "Tagalo", "Javanés"],
+    "correct": 1,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== ASIA - DIFÍCIL (3) =====
+  {
+    "id": 69,
+    "question": "¿Cuál es la montaña más alta del mundo?",
+    "options": ["K2", "Kangchenjunga", "Monte Everest", "Lhotse"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 70,
+    "question": "¿En qué año fue construido el Taj Mahal?",
+    "options": ["1632-1653", "1550-1580", "1700-1720", "1600-1620"],
+    "correct": 0,
+    "category": "Asia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 71,
+    "question": "¿Cuántos templos tiene el complejo de Angkor Wat en Camboya?",
+    "options": ["Más de 1.000", "Más de 500", "Más de 200", "Más de 100"],
+    "correct": 0,
+    "category": "Asia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CARIBE Y PLAYAS - FÁCIL (1) =====
+  {
+    "id": 72,
+    "question": "¿En qué país se encuentra Cancún?",
+    "options": ["Cuba", "República Dominicana", "México", "Guatemala"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 73,
+    "question": "¿En qué país se encuentra Punta Cana?",
+    "options": ["Cuba", "Puerto Rico", "México", "República Dominicana"],
+    "correct": 3,
+    "category": "Caribe y playas",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 74,
+    "question": "¿Cuál es la capital de Cuba?",
+    "options": ["Santiago de Cuba", "Varadero", "La Habana", "Cienfuegos"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 75,
+    "question": "¿Las Bahamas pertenecen a qué región del mundo?",
+    "options": ["Centroamérica", "Caribe", "Pacífico Sur", "Atlántico Norte"],
+    "correct": 1,
+    "category": "Caribe y playas",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 76,
+    "question": "¿Cuál es el mar que baña las costas de Cancún y Riviera Maya?",
+    "options": ["Mar Caribe", "Golfo de México", "Océano Pacífico", "Mar Mediterráneo"],
+    "correct": 0,
+    "category": "Caribe y playas",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 77,
+    "question": "¿En qué zona de México se encuentra la Riviera Maya?",
+    "options": ["Jalisco", "Oaxaca", "Quintana Roo", "Guerrero"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CARIBE Y PLAYAS - MEDIA (2) =====
+  {
+    "id": 78,
+    "question": "¿Qué país tiene las famosas playas de Varadero?",
+    "options": ["Jamaica", "Puerto Rico", "Cuba", "Haití"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 79,
+    "question": "¿Cuál es la isla más grande del Caribe?",
+    "options": ["Jamaica", "Puerto Rico", "Cuba", "La Española"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 80,
+    "question": "¿Cuál es la capital de Jamaica?",
+    "options": ["Montego Bay", "Ocho Ríos", "Kingston", "Negril"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 81,
+    "question": "¿Qué arrecife de coral es el segundo más grande del mundo, ubicado en el Caribe mexicano?",
+    "options": ["Gran Barrera de Coral", "Arrecife Mesoamericano", "Barrera de Belize", "Arrecife Alacranes"],
+    "correct": 1,
+    "category": "Caribe y playas",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CARIBE Y PLAYAS - DIFÍCIL (3) =====
+  {
+    "id": 82,
+    "question": "¿En qué país del Caribe se ubica el Parque Nacional Los Haitises?",
+    "options": ["Haití", "Cuba", "Puerto Rico", "República Dominicana"],
+    "correct": 3,
+    "category": "Caribe y playas",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== NATURALEZA - FÁCIL (1) =====
+  {
+    "id": 83,
+    "question": "¿En qué país europeo se pueden ver las Auroras Boreales con mayor frecuencia?",
+    "options": ["Suecia", "Islandia", "Noruega", "Todas las anteriores"],
+    "correct": 3,
+    "category": "Destinos de naturaleza",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 84,
+    "question": "¿En qué continente se encuentra el desierto del Sahara?",
+    "options": ["Asia", "Australia", "África", "América del Sur"],
+    "correct": 2,
+    "category": "Destinos de naturaleza",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 85,
+    "question": "¿En qué país se encuentran las Cataratas del Iguazú, compartidas con Brasil?",
+    "options": ["Uruguay", "Bolivia", "Chile", "Argentina"],
+    "correct": 3,
+    "category": "Destinos de naturaleza",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 86,
+    "question": "¿En qué océano se encuentran las Islas Maldivas?",
+    "options": ["Atlántico", "Pacífico", "Índico", "Ártico"],
+    "correct": 2,
+    "category": "Destinos de naturaleza",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 87,
+    "question": "¿Cuál es el desierto más frío y seco del mundo?",
+    "options": ["Sahara", "Atacama", "Antártica", "Gobi"],
+    "correct": 2,
+    "category": "Destinos de naturaleza",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== NATURALEZA - MEDIA (2) =====
+  {
+    "id": 88,
+    "question": "¿En qué país africano está el Serengeti, famoso por la Gran Migración?",
+    "options": ["Kenia", "Tanzania", "Sudáfrica", "Botsuana"],
+    "correct": 1,
+    "category": "Destinos de naturaleza",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 89,
+    "question": "¿Cuál es el océano más grande del mundo?",
+    "options": ["Atlántico", "Índico", "Pacífico", "Ártico"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 90,
+    "question": "¿En qué país se encuentra el bosque de bambú de Arashiyama?",
+    "options": ["China", "Vietnam", "Tailandia", "Japón"],
+    "correct": 3,
+    "category": "Destinos de naturaleza",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 91,
+    "question": "¿Cuál es el río más largo del mundo?",
+    "options": ["Amazonas", "Nilo", "Yangtsé", "Misisipi"],
+    "correct": 1,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 92,
+    "question": "¿En qué continente está el lago más grande del mundo por superficie?",
+    "options": ["Asia (Mar Caspio)", "Norteamérica (Lago Superior)", "África (Lago Victoria)", "Sudamérica (Lago Titicaca)"],
+    "correct": 0,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1559827291-72f35b878c29?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 93,
+    "question": "¿Qué país tiene la mayor cantidad de parques nacionales del mundo?",
+    "options": ["Brasil", "Australia", "Estados Unidos", "Canadá"],
+    "correct": 2,
+    "category": "Destinos de naturaleza",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== NATURALEZA - DIFÍCIL (3) =====
+  {
+    "id": 94,
+    "question": "¿Cuántas especies de tortugas gigantes viven en las Islas Galápagos?",
+    "options": ["3", "5", "9", "15"],
+    "correct": 2,
+    "category": "Destinos de naturaleza",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1559827291-72f35b878c29?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 95,
+    "question": "¿A qué profundidad aproximada se encuentra el punto más profundo del océano (Fosa de las Marianas)?",
+    "options": ["7.000 metros", "8.500 metros", "11.000 metros", "15.000 metros"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== GASTRONOMÍA VIAJERA - FÁCIL (1) =====
+  {
+    "id": 96,
+    "question": "¿Cuál es el plato más famoso de Italia?",
+    "options": ["Paella", "Sushi", "Pizza y Pasta", "Ceviche"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 97,
+    "question": "¿De qué país es originario el sushi?",
+    "options": ["China", "Corea del Sur", "Tailandia", "Japón"],
+    "correct": 3,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 98,
+    "question": "¿Cuál es el plato típico de Perú basado en pescado marinado en limón?",
+    "options": ["Lomo saltado", "Aji de gallina", "Ceviche", "Causa limeña"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 99,
+    "question": "¿Cuál es la bebida alcohólica más típica de México?",
+    "options": ["Ron", "Tequila", "Cerveza", "Mezcal"],
+    "correct": 1,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1518659526054-190340b32735?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 100,
+    "question": "¿Cuál es el plato nacional de España que lleva arroz, azafrán y mariscos?",
+    "options": ["Gazpacho", "Tortilla española", "Fabada asturiana", "Paella"],
+    "correct": 3,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 101,
+    "question": "¿Cuál es el desayuno más típico de Francia?",
+    "options": ["Tostadas con mantequilla", "Croissant y café", "Gofres", "Baguette con queso"],
+    "correct": 1,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== GASTRONOMÍA VIAJERA - MEDIA (2) =====
+  {
+    "id": 102,
+    "question": "¿De qué país es la bebida 'Mate'?",
+    "options": ["Brasil", "Chile", "Colombia", "Argentina y Uruguay"],
+    "correct": 3,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 103,
+    "question": "¿Cuál es el platillo típico de Tailandia hecho con fideos salteados?",
+    "options": ["Pho", "Laksa", "Pad Thai", "Tom Yum"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 104,
+    "question": "¿Cuál es el queso más famoso de Francia?",
+    "options": ["Gouda", "Gruyère", "Camembert", "Manchego"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 105,
+    "question": "¿Cuál es la salsa picante típica de México hecha con tomates y chiles?",
+    "options": ["Chimichurri", "Guacamole", "Salsa roja", "Mole"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1518659526054-190340b32735?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 106,
+    "question": "¿De qué país es originaria la 'Feijoada', un guiso de frijoles negros con carne?",
+    "options": ["Cuba", "Argentina", "Brasil", "Colombia"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 107,
+    "question": "¿En qué país se elabora el vino Malbec más famoso del mundo?",
+    "options": ["Chile", "España", "Argentina", "Francia"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1612294037637-ec328d0e075e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== GASTRONOMÍA VIAJERA - DIFÍCIL (3) =====
+  {
+    "id": 108,
+    "question": "¿Cuál es el nombre del plato vietnamita de sopa de fideos con caldo de huesos?",
+    "options": ["Ramen", "Laksa", "Pho", "Miso"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 109,
+    "question": "¿De qué región de España es originaria la Sobrasada?",
+    "options": ["Cataluña", "Islas Baleares", "País Vasco", "Andalucía"],
+    "correct": 1,
+    "category": "Gastronomía viajera",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CURIOSIDADES DE VIAJE - FÁCIL (1) =====
+  {
+    "id": 110,
+    "question": "¿Cuántas maravillas del mundo moderno se eligieron en 2007?",
+    "options": ["5", "7", "10", "12"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 111,
+    "question": "¿Qué documento necesitas para viajar entre países de la Unión Europea siendo ciudadano europeo?",
+    "options": ["Pasaporte", "DNI o Pasaporte", "Visa Schengen", "Solo el DNI del país"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 112,
+    "question": "¿En cuántos países se habla el español como lengua oficial?",
+    "options": ["15", "18", "21", "25"],
+    "correct": 2,
+    "category": "Curiosidades de viaje",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1518659526054-190340b32735?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 113,
+    "question": "¿Cuál es el continente más visitado por turistas en el mundo?",
+    "options": ["América", "Asia", "Europa", "Oceanía"],
+    "correct": 2,
+    "category": "Curiosidades de viaje",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CURIOSIDADES DE VIAJE - MEDIA (2) =====
+  {
+    "id": 114,
+    "question": "¿Cuál es el nombre del tren más famoso que cruza el continente europeo de Paris a Estambul?",
+    "options": ["Trans-Siberian Express", "Orient Express", "Eurostar", "TGV"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 115,
+    "question": "¿Cuál es la aerolínea más antigua del mundo en operación?",
+    "options": ["Lufthansa", "KLM", "British Airways", "Air France"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 116,
+    "question": "¿Cuántos pasajeros puede transportar un Airbus A380?",
+    "options": ["450-555 pasajeros", "300-350 pasajeros", "600-700 pasajeros", "200-250 pasajeros"],
+    "correct": 0,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 117,
+    "question": "¿Qué país tiene más islas en el mundo?",
+    "options": ["Indonesia", "Filipinas", "Suecia", "Noruega"],
+    "correct": 2,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 118,
+    "question": "¿Cuál es el viaje más largo posible en tren del mundo?",
+    "options": ["Trans-Siberiano (Moscú-Vladivostok)", "Trans-Canadiense", "Tren del Himalaya", "Indian Pacific (Australia)"],
+    "correct": 0,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CURIOSIDADES DE VIAJE - DIFÍCIL (3) =====
+  {
+    "id": 119,
+    "question": "¿Cuál fue el primer país en introducir el pasaporte como documento de viaje moderno?",
+    "options": ["Francia", "Reino Unido", "Estados Unidos", "Alemania"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 120,
+    "question": "¿Cuál es el vuelo de pasajeros más largo del mundo en distancia (aprox. 17.000 km)?",
+    "options": ["Nueva York-Singapur", "Singapur-Newark (Singapore Airlines)", "Los Ángeles-Dubái", "Londres-Sydney"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CULTURA E HISTORIA - FÁCIL (1) =====
+  {
+    "id": 121,
+    "question": "¿En qué país se construyeron las pirámides de Giza?",
+    "options": ["Iraq", "Jordania", "Turquía", "Egipto"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 122,
+    "question": "¿En qué ciudad de Jordania se encuentran las ruinas conocidas como 'la ciudad rosa'?",
+    "options": ["Ammán", "Wadi Rum", "Áqaba", "Petra"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 123,
+    "question": "¿En qué país de Centroamérica se encuentran las ruinas mayas de Tikal?",
+    "options": ["Belice", "Honduras", "México", "Guatemala"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1518659526054-190340b32735?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 124,
+    "question": "¿Cuál es la religión predominante en India?",
+    "options": ["Budismo", "Islam", "Hinduismo", "Sijismo"],
+    "correct": 2,
+    "category": "Cultura e historia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 125,
+    "question": "¿En qué ciudad marroquí se encuentra la famosa plaza de Jemaa el-Fna?",
+    "options": ["Casablanca", "Rabat", "Fez", "Marrakech"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CULTURA E HISTORIA - MEDIA (2) =====
+  {
+    "id": 126,
+    "question": "¿En qué año cayó el Muro de Berlín?",
+    "options": ["1985", "1987", "1989", "1991"],
+    "correct": 2,
+    "category": "Cultura e historia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1467269204594-f84a4e5be4d4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 127,
+    "question": "¿Qué ciudad fue la primera capital de los Estados Unidos?",
+    "options": ["Philadelphia", "Boston", "Nueva York", "Washington D.C."],
+    "correct": 2,
+    "category": "Cultura e historia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 128,
+    "question": "¿En qué año se celebraron los Juegos Olímpicos de verano en Tokio por primera vez?",
+    "options": ["1960", "1964", "1968", "1972"],
+    "correct": 1,
+    "category": "Cultura e historia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 129,
+    "question": "¿Cuál es el símbolo nacional de Australia?",
+    "options": ["Koala", "Canguro", "Pingüino", "Emu"],
+    "correct": 1,
+    "category": "Cultura e historia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 130,
+    "question": "¿En qué ciudad se celebran los Juegos Olímpicos de verano de 2024?",
+    "options": ["Londres", "Tokio", "Los Ángeles", "París"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== CULTURA E HISTORIA - DIFÍCIL (3) =====
+  {
+    "id": 131,
+    "question": "¿En qué año fue construida la Gran Muralla China en su forma actual?",
+    "options": ["Siglo III a.C.", "Siglo VII d.C.", "Siglo XIV-XVII (dinastía Ming)", "Siglo X d.C."],
+    "correct": 2,
+    "category": "Cultura e historia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 132,
+    "question": "¿Cuál es el país más antiguo del mundo según la historia documentada?",
+    "options": ["Grecia", "Egipto", "China", "Irán (Persia)"],
+    "correct": 1,
+    "category": "Cultura e historia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1539020140153-e479b8c22e70?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== GEOGRAFÍA GENERAL - FÁCIL (1) =====
+  {
+    "id": 133,
+    "question": "¿Cuál es el continente más grande del mundo?",
+    "options": ["América", "África", "Asia", "Europa"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 134,
+    "question": "¿Cuántos continentes tiene el mundo?",
+    "options": ["5", "6", "7", "8"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 135,
+    "question": "¿Cuál es la capital de Australia?",
+    "options": ["Sydney", "Melbourne", "Brisbane", "Canberra"],
+    "correct": 3,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 136,
+    "question": "¿Cuál es el país más grande del mundo por superficie?",
+    "options": ["China", "Canadá", "Estados Unidos", "Rusia"],
+    "correct": 3,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 137,
+    "question": "¿Cuál es la capital de Japón?",
+    "options": ["Osaka", "Kioto", "Tokio", "Hiroshima"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 138,
+    "question": "¿Cuál es el continente más pequeño del mundo?",
+    "options": ["Europa", "Antártica", "Oceanía", "América del Sur"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== GEOGRAFÍA GENERAL - MEDIA (2) =====
+  {
+    "id": 139,
+    "question": "¿Cuál es el punto más bajo de la Tierra?",
+    "options": ["Lago Caspio", "Mar Muerto", "Fosa de las Marianas", "Lago Baikal"],
+    "correct": 1,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 140,
+    "question": "¿Por cuántos países pasa el río Danubio?",
+    "options": ["5", "8", "10", "15"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1467269204594-f84a4e5be4d4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 141,
+    "question": "¿Cuál es el desierto más grande del mundo?",
+    "options": ["Sahara", "Gobi", "Atacama", "Antártica"],
+    "correct": 3,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 142,
+    "question": "¿Cuántos países tiene el continente africano?",
+    "options": ["47", "54", "60", "67"],
+    "correct": 1,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== GEOGRAFÍA GENERAL - DIFÍCIL (3) =====
+  {
+    "id": 143,
+    "question": "¿Cuál es la cadena montañosa más larga del mundo?",
+    "options": ["Himalayas", "Andes", "Cordillera de las Rocosas", "Atlas"],
+    "correct": 1,
+    "category": "Geografía general",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 144,
+    "question": "¿Cuántos husos horarios tiene Rusia?",
+    "options": ["9", "11", "13", "15"],
+    "correct": 1,
+    "category": "Geografía general",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  # ===== MÁS EUROPA (para llegar a distribución correcta) =====
+  {
+    "id": 145,
+    "question": "¿En qué ciudad se encuentra la Ópera de Sydney?",
+    "options": ["Melbourne", "Brisbane", "Sydney", "Adelaide"],
+    "correct": 2,
+    "category": "Oceanía",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 146,
+    "question": "¿Cuál es la moneda oficial de Japón?",
+    "options": ["Yuan", "Ringgit", "Won", "Yen"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 147,
+    "question": "¿Cuál es la capital de India?",
+    "options": ["Mumbai", "Kolkata", "Nueva Delhi", "Bangalore"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 148,
+    "question": "¿Qué símbolo famoso se encuentra en la bahía de Río de Janeiro?",
+    "options": ["Torre Eiffel", "Pan de Azúcar", "Cristo Redentor", "B y C son correctas"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 149,
+    "question": "¿Cuál es el país más visitado del mundo?",
+    "options": ["España", "Francia", "Italia", "China"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 150,
+    "question": "¿En qué océano se encuentran las Islas Hawaii?",
+    "options": ["Atlántico", "Índico", "Ártico", "Pacífico"],
+    "correct": 3,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 151,
+    "question": "¿Cuál es la capital de Portugal?",
+    "options": ["Porto", "Coimbra", "Faro", "Lisboa"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 152,
+    "question": "¿En qué ciudad se encuentra el Museo del Prado?",
+    "options": ["Barcelona", "Sevilla", "Valencia", "Madrid"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 153,
+    "question": "¿En qué continente se encuentra Sudáfrica?",
+    "options": ["Oceanía", "América del Sur", "Asia", "África"],
+    "correct": 3,
+    "category": "Geografía general",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 154,
+    "question": "¿Cuál es la montaña más alta de Africa?",
+    "options": ["Monte Kenia", "Monte Kilimanjaro", "Ras Dashen", "Pico de Oryxe"],
+    "correct": 1,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 155,
+    "question": "¿En qué país se encuentra la Gran Barrera de Coral?",
+    "options": ["Nueva Zelanda", "Indonesia", "Filipinas", "Australia"],
+    "correct": 3,
+    "category": "Destinos de naturaleza",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 156,
+    "question": "¿Cuál es la capital de Brasil?",
+    "options": ["São Paulo", "Río de Janeiro", "Salvador", "Brasilia"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 157,
+    "question": "¿Qué moneda se usa en el Reino Unido?",
+    "options": ["Euro", "Corona", "Franco", "Libra esterlina"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 158,
+    "question": "¿En qué ciudad italiana se ubica el Vaticano?",
+    "options": ["Florencia", "Nápoles", "Milán", "Roma"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 159,
+    "question": "¿Cuál es la capital de Turquía?",
+    "options": ["Estambul", "Izmir", "Ankara", "Bursa"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 160,
+    "question": "¿Cuál es la ciudad más visitada de España?",
+    "options": ["Barcelona", "Sevilla", "Madrid", "Valencia"],
+    "correct": 0,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 161,
+    "question": "¿Cuál es el volcán más famoso de Italia?",
+    "options": ["Monte Etna", "Vesubio", "Stromboli", "Monte Vesuvio"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 162,
+    "question": "¿En qué ciudad europea se encuentra la Little Mermaid, la estatua del cuento de Andersen?",
+    "options": ["Estocolmo", "Oslo", "Helsinki", "Copenhague"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 163,
+    "question": "¿Qué ciudad es la capital de Bélgica?",
+    "options": ["Amberes", "Gante", "Brujas", "Bruselas"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 164,
+    "question": "¿Cuál es el lago más grande de América del Norte?",
+    "options": ["Lago Michigan", "Lago Huron", "Lago Erie", "Lago Superior"],
+    "correct": 3,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 165,
+    "question": "¿En qué ciudad de Arabia Saudita se encuentra la Kaaba, el lugar más sagrado del Islam?",
+    "options": ["Medina", "Jeddah", "Riad", "La Meca"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 166,
+    "question": "¿Cuántos idiomas oficiales tiene Suiza?",
+    "options": ["1", "2", "3", "4"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 167,
+    "question": "¿En qué ciudad de Colombia se encuentra el Museo del Oro?",
+    "options": ["Medellín", "Cartagena", "Cali", "Bogotá"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 168,
+    "question": "¿En qué país se encuentra el desierto de Atacama, el más árido del mundo?",
+    "options": ["Argentina", "Bolivia", "Perú", "Chile"],
+    "correct": 3,
+    "category": "Destinos de naturaleza",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 169,
+    "question": "¿Cuántos países comparten la Amazonía?",
+    "options": ["5", "7", "9", "11"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 170,
+    "question": "¿En qué ciudad de Japón se encuentran los templos de Kinkaku-ji (pabellón de oro)?",
+    "options": ["Tokio", "Nara", "Osaka", "Kioto"],
+    "correct": 3,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 171,
+    "question": "¿Cuál es la segunda ciudad más grande de Australia?",
+    "options": ["Brisbane", "Perth", "Adelaide", "Melbourne"],
+    "correct": 3,
+    "category": "Oceanía",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 172,
+    "question": "¿Cuál es el nombre del tren bala japonés?",
+    "options": ["Hikari", "Shinkansen", "Nozomi", "Hayabusa"],
+    "correct": 1,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 173,
+    "question": "¿Qué país latinoamericano es el mayor productor de café del mundo?",
+    "options": ["Colombia", "México", "Venezuela", "Brasil"],
+    "correct": 3,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 174,
+    "question": "¿En qué año fue construida la Muralla de Adriano en el norte de Inglaterra?",
+    "options": ["Siglo I a.C.", "Siglo II d.C.", "Siglo V d.C.", "Siglo III d.C."],
+    "correct": 1,
+    "category": "Cultura e historia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 175,
+    "question": "¿Cuál es el plato nacional de Alemania?",
+    "options": ["Schnitzel", "Bratwurst", "Sauerbraten", "Currywurst"],
+    "correct": 0,
+    "category": "Gastronomía viajera",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1467269204594-f84a4e5be4d4?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 176,
+    "question": "¿En qué ciudad se celebra el famoso Carnaval de Venecia?",
+    "options": ["Milán", "Roma", "Venecia", "Florencia"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 177,
+    "question": "¿Cuál es el nombre del famoso barrio de flamenco en Sevilla?",
+    "options": ["El Arenal", "Triana", "Santa Cruz", "La Macarena"],
+    "correct": 1,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 178,
+    "question": "¿En qué país se encuentra Chichen Itzá, la pirámide maya?",
+    "options": ["Guatemala", "Belice", "Honduras", "México"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1518659526054-190340b32735?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 179,
+    "question": "¿Cuál es el nombre del casco histórico de Colonia, Colombia, Patrimonio de la Humanidad?",
+    "options": ["La Candelaria", "La Ciudad Amurallada", "El Pedregal", "Getsemaní"],
+    "correct": 1,
+    "category": "América Latina",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 180,
+    "question": "¿Cuál es la bebida alcohólica típica de Brasil?",
+    "options": ["Pisco", "Ron", "Caipirinha", "Chicha"],
+    "correct": 2,
+    "category": "Gastronomía viajera",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 181,
+    "question": "¿En qué ciudad se encuentra la catedral de Notre Dame?",
+    "options": ["Roma", "Bruselas", "Lyon", "París"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 182,
+    "question": "¿Cuál es la capital de Colombia?",
+    "options": ["Medellín", "Cali", "Cartagena", "Bogotá"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 183,
+    "question": "¿Cuál es el país más pequeño de América del Sur?",
+    "options": ["Uruguay", "Paraguay", "Surinam", "Guyana"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 184,
+    "question": "¿Cuál es el nombre del volcán activo más famoso de Hawái?",
+    "options": ["Mauna Kea", "Kilauea", "Mauna Loa", "Hualalai"],
+    "correct": 1,
+    "category": "Destinos de naturaleza",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 185,
+    "question": "¿Qué país tiene la mayor cantidad de Patrimonio de la Humanidad UNESCO?",
+    "options": ["España", "Francia", "China", "Italia"],
+    "correct": 3,
+    "category": "Cultura e historia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 186,
+    "question": "¿En qué país se encuentra el famoso monumento de Stonehenge?",
+    "options": ["Irlanda", "Escocia", "Gales", "Inglaterra"],
+    "correct": 3,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 187,
+    "question": "¿Cuál es la playa más famosa de Tailandia en la isla de Phuket?",
+    "options": ["Playa Patong", "Playa Kata", "Playa Karon", "Playa Kamala"],
+    "correct": 0,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 188,
+    "question": "¿En qué ciudad se encuentra la sede de la ONU?",
+    "options": ["Washington D.C.", "Ginebra", "Londres", "Nueva York"],
+    "correct": 3,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 189,
+    "question": "¿Cuál es el idioma oficial de Brasil?",
+    "options": ["Español", "Inglés", "Guaraní", "Portugués"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 190,
+    "question": "¿Cuál es la capital de Perú?",
+    "options": ["Cusco", "Arequipa", "Trujillo", "Lima"],
+    "correct": 3,
+    "category": "América Latina",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1526392060635-9d6019884377?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 191,
+    "question": "¿Cuál es el canal artificial más importante del mundo que une el Atlántico con el Pacífico?",
+    "options": ["Canal de Suez", "Canal de Panamá", "Canal de Kiel", "Canal de Nicaragua"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 192,
+    "question": "¿En qué ciudad se realiza la famosa Tomatina, festival donde se lanzan tomates?",
+    "options": ["Valencia", "Murcia", "Buñol", "Alicante"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 193,
+    "question": "¿Cuántos escalones tiene la Torre Eiffel hasta el primer piso?",
+    "options": ["216", "328", "300", "400"],
+    "correct": 1,
+    "category": "Curiosidades de viaje",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 194,
+    "question": "¿Qué tipo de transporte usa la mayoría de la gente para moverse en Ámsterdam?",
+    "options": ["Tren", "Automóvil", "Bicicleta", "Tranvía"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 1,
+    "image": "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 195,
+    "question": "¿En qué país de Europa se encuentra el lago de Bled?",
+    "options": ["Austria", "Croacia", "Eslovenia", "Bosnia"],
+    "correct": 2,
+    "category": "Europa",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 196,
+    "question": "¿Cuál es el nombre de la playa más fotografiada de Maldivas con bungalows sobre el agua?",
+    "options": ["Playa de Hulhumale", "Baros Island", "Overwater Bungalows", "Playa de Veligandu"],
+    "correct": 2,
+    "category": "Caribe y playas",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 197,
+    "question": "¿En qué ciudad de Chile se embarca para hacer turismo a la Antártida?",
+    "options": ["Santiago", "Valparaíso", "Puerto Montt", "Punta Arenas"],
+    "correct": 3,
+    "category": "Destinos de naturaleza",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 198,
+    "question": "¿Qué ciudad de India alberga el Taj Mahal?",
+    "options": ["Nueva Delhi", "Jaipur", "Agra", "Mumbai"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 2,
+    "image": "https://images.unsplash.com/photo-1564507592333-c60657eea523?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 199,
+    "question": "¿Cuál es el nombre del festival de linternas más famoso de Tailandia?",
+    "options": ["Songkran", "Loy Krathong", "Yi Peng", "Vegetarian Festival"],
+    "correct": 2,
+    "category": "Asia",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1528181304800-259b08848526?w=600&q=80",
+    "image_credit": "Unsplash"
+  },
+  {
+    "id": 200,
+    "question": "¿Cuántos países del mundo no tienen salida al mar (países sin litoral)?",
+    "options": ["28", "34", "44", "52"],
+    "correct": 2,
+    "category": "Geografía general",
+    "difficulty": 3,
+    "image": "https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=600&q=80",
+    "image_credit": "Unsplash"
+  }
+]
+
+# Write to file
+with open('/workspace/data/trivia-viajera/questions.json', 'w', encoding='utf-8') as f:
+    json.dump(questions, f, ensure_ascii=False, indent=2)
+
+print(f"Total preguntas escritas: {len(questions)}")
+
+# Count difficulty distribution
+diff_count = {1: 0, 2: 0, 3: 0}
+for q in questions:
+    diff_count[q['difficulty']] += 1
+print(f"Dificultad 1 (fácil): {diff_count[1]}")
+print(f"Dificultad 2 (media): {diff_count[2]}")
+print(f"Dificultad 3 (difícil): {diff_count[3]}")
+
+# Count categories
+from collections import Counter
+cats = Counter(q['category'] for q in questions)
+for cat, count in sorted(cats.items()):
+    print(f"  {cat}: {count}")

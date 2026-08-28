@@ -222,7 +222,7 @@
     </div>
     <h1 class="splash-title">Trivia Viajera ✈️</h1>
     <p class="splash-subtitle">¿Cuánto sabes del mundo?</p>
-    <div class="splash-badge">🌟 Trivia viajera 2026</div>
+    <div class="splash-badge">🌟 Travel Fest 2026</div>
     <button class="btn-primary" id="btn-start">¡Empezar aventura!</button>
     <p class="splash-hint">15 preguntas · Destinos del mundo</p>
   </section>
@@ -362,37 +362,16 @@ function getImageForQuestion(q) {
   return 'https://images.unsplash.com/' + imgs[idx] + '?w=600&q=80';
 }
 
-// === CONFIG: Pega aquí la URL de Google Apps Script (termina en /exec) ===
+// === CONFIG: URL de Google Apps Script (termina en /exec) ===
 const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbyovyUBeDhaVsSeehkzZ4YKGxCt6IMI7mORR4VK0oEruSgm1w_zhFwWAL9jUCNk4LYY/exec';
 
-// JSONP helper - llama a Google Apps Script desde el navegador
-function callGoogle(data) {
-  return new Promise((resolve, reject) => {
-    const callbackName = 'jsonp_cb_' + Date.now() + '_' + Math.floor(Math.random() * 100000);
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.charset = 'utf-8';
-    
-    window[callbackName] = function(response) {
-      delete window[callbackName];
-      document.body.removeChild(script);
-      resolve(response);
-    };
-    
-    script.onerror = function() {
-      delete window[callbackName];
-      if (script.parentNode) document.body.removeChild(script);
-      reject(new Error('No se pudo conectar con Google Sheets'));
-    };
-    
-    // Agregar callback y data como parámetro
-    const params = new URLSearchParams();
-    params.append('callback', callbackName);
-    params.append('data', JSON.stringify(data));
-    script.src = GOOGLE_SHEET_URL + '?' + params.toString();
-    
-    document.body.appendChild(script);
-  });
+// Envía datos a Google Sheets usando un pixel invisible (cross-origin, sin CORS)
+function sendToGoogle(data) {
+  const params = new URLSearchParams();
+  params.append('data', JSON.stringify(data));
+  const img = new Image();
+  img.src = GOOGLE_SHEET_URL + '?' + params.toString();
+  // Fire-and-forget: la petición se hace, no esperamos respuesta
 }
 
 // State
@@ -421,7 +400,15 @@ function generateHint(q){
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 
 // Load questions
-async function loadQuestions(){const resp=await fetch('questions.json');state.allQuestions=await resp.json();}
+async function loadQuestions(){
+  try {
+    const resp=await fetch('./questions.json');
+    state.allQuestions=await resp.json();
+    console.log('Preguntas cargadas: '+state.allQuestions.length);
+  } catch(e){
+    console.error('Error cargando preguntas:', e);
+  }
+}
 
 // Load sucursales into dropdown
 async function loadSucursales(){
@@ -466,44 +453,28 @@ function validateForm(){
 }
 
 // Form submit
-document.getElementById('reg-form').addEventListener('submit', async (e) => {
+document.getElementById('reg-form').addEventListener('submit', (e) => {
   e.preventDefault();
   if(!validateForm()) return;
 
   const selVal = document.getElementById('inp-sucursal').value;
   const [sucursal, marca] = selVal.split('|||');
 
-  document.getElementById('btn-submit-form').disabled = true;
-  document.getElementById('form-loading').style.display = 'block';
+  // Guardar datos en memoria, se envían al final de la trivia
+  state.formData = {
+    nombre: document.getElementById('inp-nombre').value.trim(),
+    telefono: document.getElementById('inp-telefono').value.trim(),
+    correo: document.getElementById('inp-correo').value.trim(),
+    sucursal: sucursal,
+    marca: marca,
+  };
 
-  try {
-    const result = await callGoogle({
-      action: 'registrar',
-      nombre: document.getElementById('inp-nombre').value.trim(),
-      telefono: document.getElementById('inp-telefono').value.trim(),
-      correo: document.getElementById('inp-correo').value.trim(),
-      sucursal: sucursal,
-      marca: marca,
-    });
-    if(result.ok){
-      state.registrationId = result.id;
-      document.getElementById('btn-submit-form').disabled = false;
-      document.getElementById('form-loading').style.display = 'none';
-      startGame();
-    } else {
-      alert('Error: ' + (result.error || 'desconocido'));
-      document.getElementById('btn-submit-form').disabled = false;
-      document.getElementById('form-loading').style.display = 'none';
-    }
-  } catch(err) {
-    alert('No se pudo conectar con Google Sheets. Verifica la URL en el código.');
-    document.getElementById('btn-submit-form').disabled = false;
-    document.getElementById('form-loading').style.display = 'none';
-  }
+  startGame();
 });
 
 // Start game
 function startGame(){
+  if(state.allQuestions.length === 0){ alert('Las preguntas no se cargaron. Recarga la página.'); return; }
   state.sessionQuestions = pickQuestions(state.allQuestions);
   state.currentIndex = 0; state.score = 0; state.answers = [];
   state.answered = false;
@@ -667,8 +638,17 @@ function showResult(){
   showScreen('screen-result');
   if(total >= 9) launchConfetti();
   // Save score to database
-  if(state.registrationId){
-    callGoogle({ action: 'resultado', id: state.registrationId, score: total }).catch(() => {});
+  // Enviar todos los datos + score a Google Sheets en una sola petición
+  if(state.formData){
+    sendToGoogle({
+      action: 'registrar',
+      nombre: state.formData.nombre,
+      telefono: state.formData.telefono,
+      correo: state.formData.correo,
+      sucursal: state.formData.sucursal,
+      marca: state.formData.marca,
+      score: total
+    });
   }
 }
 
@@ -701,6 +681,7 @@ document.getElementById('joker-skip').addEventListener('click', jokerSkip);
 document.getElementById('joker-hint').addEventListener('click', jokerHint);
 
 document.getElementById('btn-play-again').addEventListener('click', () => {
+  state.formData = null;
   showScreen('screen-form');
   document.getElementById('reg-form').reset();
 });

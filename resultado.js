@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
   const sheetUrl = process.env.GOOGLE_SHEET_URL;
   if (!sheetUrl) {
-    return res.status(500).json({ ok: false, error: 'Falta la variable GOOGLE_SHEET_URL' });
+    return res.status(500).json({ ok: false, error: 'GOOGLE_SHEET_URL no configurada' });
   }
 
   try {
@@ -22,15 +22,25 @@ module.exports = async (req, res) => {
         action: 'resultado',
         id: id,
         score: parseInt(score)
-      })
+      }),
+      redirect: 'follow'
     });
-    const data = await response.json();
+
+    const text = await response.text();
+    
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      return res.status(500).json({ ok: false, error: 'Google no devolvió JSON válido' });
+    }
+
     if (data.ok) {
       return res.status(200).json({ ok: true });
     } else {
       return res.status(500).json({ ok: false, error: data.error || 'Error en Google Sheets' });
     }
   } catch (err) {
-    return res.status(500).json({ ok: false, error: err.message });
+    return res.status(500).json({ ok: false, error: 'No se pudo conectar a Google: ' + err.message });
   }
 };

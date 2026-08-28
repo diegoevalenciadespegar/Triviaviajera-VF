@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
 
   const sheetUrl = process.env.GOOGLE_SHEET_URL;
   if (!sheetUrl) {
-    return res.status(500).json({ ok: false, error: 'Falta la variable GOOGLE_SHEET_URL' });
+    return res.status(500).json({ ok: false, error: 'GOOGLE_SHEET_URL no configurada en Vercel' });
   }
 
   try {
@@ -21,15 +21,25 @@ module.exports = async (req, res) => {
       body: JSON.stringify({
         action: 'registrar',
         nombre, telefono, correo, sucursal, marca
-      })
+      }),
+      redirect: 'follow'
     });
-    const data = await response.json();
+
+    const text = await response.text();
+    
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (e) {
+      return res.status(500).json({ ok: false, error: 'Google no devolvió JSON válido. ¿Usaste la URL /exec y no /dev? Respuesta: ' + text.substring(0, 200) });
+    }
+
     if (data.ok) {
       return res.status(200).json({ ok: true, id: data.id });
     } else {
       return res.status(500).json({ ok: false, error: data.error || 'Error en Google Sheets' });
     }
   } catch (err) {
-    return res.status(500).json({ ok: false, error: err.message });
+    return res.status(500).json({ ok: false, error: 'No se pudo conectar a Google: ' + err.message });
   }
 };

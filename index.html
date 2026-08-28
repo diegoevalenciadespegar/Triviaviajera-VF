@@ -469,7 +469,7 @@ document.getElementById('reg-form').addEventListener('submit', async (e) => {
       document.getElementById('form-loading').style.display = 'none';
     }
   } catch(err) {
-    alert('No se pudo conectar con el servidor. Intenta de nuevo.');
+    alert('Error de conexión: ' + err.message + '. Revisa que GOOGLE_SHEET_URL esté configurada en Vercel.');
     document.getElementById('btn-submit-form').disabled = false;
     document.getElementById('form-loading').style.display = 'none';
   }
